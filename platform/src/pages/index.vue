@@ -4,33 +4,98 @@
       <div class="index-left-block">
         <h2>全部产品</h2>
         <div class="">
-          <h3>PC产品</h3>
+          <template v-for="item in productList">
+            <h3>{{item.title}}</h3>
+            <ul>
+              <li v-for="val in item.list">
+                <a :href="val.url">{{val.name}}</a>
+              </li>
+            </ul>
+          </template>
+          <!-- <h3>PC产品</h3>
           <ul>
             <li>数据统计</li>
           </ul>
           <h3>手机产品</h3>
           <ul>
             <li>数据统计</li>
-          </ul>
+          </ul> -->
         </div>
       </div>
       <div class="index-left-block lastest-news">
         <h2>最新消息</h2>
-        <ul>
-          <li>新闻条目1</li>
+        <ul v-for="item in newsList">
+          <li>
+            <a :href="item.url">{{sliceText(item.title)}}</a>
+          </li>
         </ul>
       </div>
+    </div>
+    <div class="index-right">
+        <div class="slid-compent"></div>
+        <div class="index-board-item">
+          <div class="index-board-item-inner">
+            <h2>开放产品</h2>
+            <p>开放的产品</p>
+            <div class="index-board-button">
+              <a href="#">立即购买</a>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
 export default({
   created:function(){//promise对象
     
   },
+  mounted:function(){
+    this.getProductList();
+    this.getNewsList();
+  },
+  computed:{//在HTML DOM加载后马上执行的，如赋值；
+    
+  },
+  
   data(){
     return {
+      productList:{
+        "pc":{
+          "title": "PC产品",
+          "list":[]
+        },
+        "app":{
+          "title": "手机应用类",
+          "last": true,
+          "list":[]
+        }
+      },
+      newsList:[],
+      maxLength:8
+    }
+  },
+  methods:{
+    getProductList(){
+      axios.get('api/getProductList').then((response)=>{
+        this.productList=response.data.data;
+      }).catch((response)=>{
+        console.log(response);
+      })
+    },
+    getNewsList(){
+      axios.get('api/getNewsList').then((response)=>{
+        this.newsList=response.data.data;
+      }).catch((response)=>{
+        console.log(response);
+      })
+    },
+    sliceText(text){
+      return text.length>this.maxLength?text.slice(0,this.maxLength)+'...':text
       
     }
   }

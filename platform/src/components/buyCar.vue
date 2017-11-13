@@ -1,6 +1,6 @@
 <template id="">
   <div class="page-shopping-cart" id="shopping-cart">
-    <h4 class="cart-title">购物清单</h4>
+    <!--<h4 class="cart-title">购物清单</h4>
     <div class="cart-product-title clearfix">
         <div class="td-check fl"><span class="check-span fl check-all"></span>全选</div>
         <div class="td-product fl">商品</div>
@@ -13,7 +13,7 @@
         <table>
             <tbody><tr>
                 <td class="td-check"><span class="check-span"></span></td>
-                <td class="td-product"><img src="testimg.jpg" width="98" height="98">
+                <td class="td-product">
                     <div class="product-info">
                         <h6>【斯文】甘油&nbsp;|&nbsp;丙三醇</h6>
                         <p>品牌：韩国skc&nbsp;&nbsp;产地：韩国</p>
@@ -76,7 +76,7 @@
         <a href="javascript:;" class="choose-worder fl"><span></span>绑定跟单员</a>
         <div class="worker-info fl">
         </div>
-    </div>
+    </div>-->
 </div>
 </template>
 <script type="text/javascript">

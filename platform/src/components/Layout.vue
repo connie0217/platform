@@ -21,6 +21,7 @@
                  </li>
            </ul>
          </div>
+        <p class="route-nav">当前页：{{$route.name}}</p>
       </div>
     </div>
     <div class="app-content">
@@ -35,10 +36,25 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
 export default {
   data () {
     return {
       
+    }
+  },
+  mounted(){
+    this.getdatalist();
+  },
+  methods:{
+    getdatalist(){
+      axios.get('api/getOrderList').then((response)=>{
+        //var response = response.body;
+          console.log(response.data);//需要这样获取到数组
+      })
     }
   }
 }
@@ -103,6 +119,14 @@ body {
   font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
   font-size: 14px;
   color: #444;
+}
+.route-nav{
+  height: 30px;
+  width:300px;
+  color:red;
+  position: absolute;
+  top:50px;
+  left:10px;
 }
 .app-header {
   background: #363636;
