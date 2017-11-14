@@ -32,16 +32,24 @@
       </div>
     </div>
     <div class="index-right">
-        <div class="slid-compent"></div>
-        <div class="index-board-item">
+        <slideShow></slideShow>
+
+        <div class="index-board-item" v-for="(item,index) in boardList" :class="[{'line-last':index%2==0},'index-board-' + item.id]">
           <div class="index-board-item-inner">
-            <h2>开放产品</h2>
-            <p>开放的产品</p>
+            <h2>{{item.title}}</h2>
+            <p>{{item.description}}</p>
             <div class="index-board-button">
               <a href="#">立即购买</a>
             </div>
           </div>
+            
+            <!--<h2>开放产品</h2>
+            <p>开放的产品</p>
+            <div class="index-board-button">
+              <a href="#">立即购买</a>
+            </div>-->
         </div>
+
     </div>
   </div>
 </template>
@@ -49,14 +57,20 @@
 <script type="text/javascript">
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import slideShow from '../components/slideShow'
+
 
 export default({
+  components:{
+    slideShow
+  },
   created:function(){//promise对象
     
   },
   mounted:function(){
     this.getProductList();
     this.getNewsList();
+    //this.getProductList();
   },
   computed:{//在HTML DOM加载后马上执行的，如赋值；
     
@@ -76,6 +90,36 @@ export default({
         }
       },
       newsList:[],
+      boardList: [
+        {
+          title: '开放产品',
+          description: '开放产品是一款开放产品',
+          id: 'car',
+          toKey: 'analysis',
+          saleout: false
+        },
+        {
+          title: '品牌营销',
+          description: '品牌营销帮助你的产品更好地找到定位',
+          id: 'earth',
+          toKey: 'count',
+          saleout: false
+        },
+        {
+          title: '使命必达',
+          description: '使命必达快速迭代永远保持最前端的速度',
+          id: 'loud',
+          toKey: 'forecast',
+          saleout: true
+        },
+        {
+          title: '勇攀高峰',
+          description: '帮你勇闯高峰，到达事业的顶峰',
+          id: 'hill',
+          toKey: 'publish',
+          saleout: false
+        }
+      ],
       maxLength:8
     }
   },
@@ -94,9 +138,9 @@ export default({
         console.log(response);
       })
     },
+    
     sliceText(text){
       return text.length>this.maxLength?text.slice(0,this.maxLength)+'...':text
-      
     }
   }
 })

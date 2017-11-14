@@ -29,7 +29,6 @@ let datalist =  require('../db.json')
 let dataRouter = express.Router()
 let getNewsList = datalist.getNewsList
 let getOrderList = datalist.getOrderList
-let getProductList = datalist.productList
 
 dataRouter.get('/getNewsList',function(req, res){
   res.json({
@@ -43,12 +42,7 @@ dataRouter.get('/getOrderList',function(req, res){
     data: getOrderList//具体数据
   })
 })
-dataRouter.get('/getProductList',function(req, res){
-  res.json({
-    errno:0,//错误码
-    data: getProductList//具体数据
-  })
-})
+
 //重新定义的api
 app.use('/api',dataRouter);
 
