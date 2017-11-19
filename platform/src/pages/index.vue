@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="index-right">
-        <slideShow></slideShow>
+        <slideShow :slides="slides"></slideShow>
 
         <div class="index-board-item" v-for="(item,index) in boardList" :class="[{'line-last':index%2==0},'index-board-' + item.id]">
           <div class="index-board-item-inner">
@@ -90,6 +90,28 @@ export default({
         }
       },
       newsList:[],
+      slides: [
+        {
+          src: require('../assets/slideShow/pic1.jpg'),
+          title: 'xxx1',
+          href: 'detail/analysis'
+        },
+        {
+          src: require('../assets/slideShow/pic2.jpg'),
+          title: 'xxx2',
+          href: 'detail/count'
+        },
+        {
+          src: require('../assets/slideShow/pic3.jpg'),
+          title: 'xxx3',
+          href: 'http://xxx.xxx.com'
+        },
+        {
+          src: require('../assets/slideShow/pic4.jpg'),
+          title: 'xxx4',
+          href: 'detail/forecast'
+        }
+      ],
       boardList: [
         {
           title: '开放产品',
