@@ -1,5 +1,5 @@
 <template id="">
-  <div class="slide-show">
+  <div class="slide-show" @mouseover="stopAuto" @mouseout="autoChange">
     <div class="slide-img">
         <a href="" v-show=true>
           <transition name="slide-trans">
@@ -35,6 +35,10 @@ export default{
     slides:{
       type: Array,
       default: []
+    },
+    autoTime:{
+      type:Number,
+      default:800
     }
   },
   data(){
@@ -45,6 +49,8 @@ export default{
   },
   mounted(){
     console.log(this.slides);
+    this.autoChange();
+    
   },
   computed:{//专用来处理实例的数据//里面的函数不是事件的方法，而是处理数据的方法//常常用作方法里传入的参数，模板里传入的数据
     goPrev(){
@@ -69,7 +75,15 @@ export default{
       setTimeout(() => {
         this.isShow = true
         this.picNum=number;
-      },10)
+      },10)  
+    },
+    autoChange(){
+      this.timerId=setInterval(()=>{
+        this.changePic(this.goNext);
+      },this.autoTime)
+    },
+    stopAuto(){
+      clearInterval(this.timerId)
       
     }
   }

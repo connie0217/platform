@@ -7,8 +7,9 @@
          </router-link>
          <div class="head-nav">
            <ul class="nav-list">
-             <li>登陆</li>
-             <li>|注册</li>
+             <li @click="showDialog('isShowAboutDialog')">登陆</li>
+             <li  @click="showDialog('isShowLogDialog')">|注册</li>
+             <li >|关于</li>
              <li>
                <router-link :to="{path: '/tab'}">
                  |关于tab
@@ -30,8 +31,16 @@
       </keep-alive>
     </div>
     <div class="app-footer">
-      <p>© 2016 fishenal MIT</p>
+      <p>© 2016 fishenal MIT11111</p>
     </div>
+
+    <my-dialog v-show="isShowAboutDialog"  @on-close="closeDialog('isShowAboutDialog')">
+      <p>本报告在调研数据的基础上，采用定性与定量相结合的方式深入分析了专车市场发展的驱动因素与阻碍因素</p>
+    </my-dialog>
+    <my-dialog v-show="isShowLogDialog"  @on-close="closeDialog('isShowLogDialog')">
+      <login-form></login-form>
+    </my-dialog>
+    
   </div>
 </template>
 
@@ -39,11 +48,21 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Dialog from './base/dialog'
+// 对于dialog来说，可能是登陆弹框或者注册弹框，样式比较复杂，所以可以使用插槽slot
+import loginForm from './logForm'
+
 
 export default {
+  components: {
+    MyDialog: Dialog,
+    loginForm
+  },
   data () {
     return {
-      
+      isShowAboutDialog:false,
+      isShowLogDialog:false,
+      isShowRegDialog:false
     }
   },
   mounted(){
@@ -55,6 +74,12 @@ export default {
         //var response = response.body;
           console.log(response.data);//需要这样获取到数组
       })
+    },
+    closeDialog (attr) {
+      this[attr] = false
+    },
+    showDialog(attr){
+      this[attr] = true;
     }
   }
 }
