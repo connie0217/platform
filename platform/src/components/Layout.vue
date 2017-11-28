@@ -7,9 +7,9 @@
          </router-link>
          <div class="head-nav">
            <ul class="nav-list">
-             <li @click="showDialog('isShowAboutDialog')">登陆</li>
-             <li  @click="showDialog('isShowLogDialog')">|注册</li>
-             <li >|关于</li>
+             <li  @click="showDialog('isShowLogDialog')">登陆</li>
+             <li >|注册</li>
+             <li @click="showDialog('isShowAboutDialog')">|关于</li>
              <li>
                <router-link :to="{path: '/tab'}">
                  |关于tab
